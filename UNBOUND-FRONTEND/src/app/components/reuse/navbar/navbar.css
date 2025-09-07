@@ -1,0 +1,21 @@
+/* Additional custom styles if needed */
+.navbar-brand {
+  background: linear-gradient(135deg, #8b5cf6, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Smooth transitions for mobile menu */
+@media (max-width: 768px) {
+  .mobile-menu-enter {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  
+  .mobile-menu-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.3s ease-in-out;
+  }
+}

@@ -1,0 +1,191 @@
+<section class="relative py-6">
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Header -->
+    <div class="text-center mb-20">
+      <div class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-violet-100 to-purple-100 rounded-full text-violet-700 text-sm font-medium mb-6">
+        <span class="text-lg mr-2">❓</span>
+        FAQ
+      </div>
+      
+      <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+        Address 
+        <span class="relative">
+          <span class="bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">
+            Concerns
+          </span>
+          <svg class="absolute -bottom-2 left-0 w-full h-3" viewBox="0 0 100 12" fill="none">
+            <path d="M2 10C20 3 40 1 98 10" stroke="url(#gradient6)" stroke-width="2" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="gradient6" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#7c3aed"/>
+                <stop offset="100%" style="stop-color:#a855f7"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+      </h2>
+      
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+        Quick answers to remove any hesitation — we keep it short and playful! 🎯
+      </p>
+    </div>
+
+    <!-- FAQ Accordion Style -->
+    <div class="max-w-5xl mx-auto">
+      <div class="space-y-4">
+        <div 
+          *ngFor="let faq of faqs; let i = index"
+          class="group relative"
+          [class.animate-faq]="isLoaded"
+          [style.animation-delay]="(i * 150) + 'ms'"
+        >
+          <!-- FAQ Item -->
+          <div 
+            class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-500 border border-violet-100/50 hover:border-violet-200 cursor-pointer"
+            [class.expanded]="expandedIndex === i"
+            (click)="toggleFaq(i)"
+          >
+            <!-- Question Header -->
+            <div class="flex items-center justify-between p-6">
+              <div class="flex items-center space-x-4 flex-grow">
+                <!-- Icon -->
+                <div class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center shadow-lg group-hover:animate-bounce transition-transform" [ngStyle]="{'background': faq.iconGradient}">
+                  <span class="text-2xl">{{ faq.icon }}</span>
+                </div>
+                
+                <!-- Question -->
+                <h3 class="text-xl font-bold text-gray-900 group-hover:text-violet-700 transition-colors">
+                  {{ faq.question }}
+                </h3>
+              </div>
+
+              <!-- Expand/Collapse Icon -->
+              <div class="flex-shrink-0 ml-4">
+                <div class="w-8 h-8 rounded-full bg-violet-100 flex items-center justify-center transition-all duration-300" 
+                     [class.rotate-180]="expandedIndex === i">
+                  <svg class="w-5 h-5 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Answer Content (Expandable) -->
+            <div class="overflow-hidden transition-all duration-500 ease-in-out"
+                 [style.max-height]="expandedIndex === i ? '1000px' : '0'"
+                 [style.opacity]="expandedIndex === i ? '1' : '0'">
+              <div class="px-6 pb-6">
+                <div class="ml-16"> <!-- Align with question text -->
+                  <!-- Answer -->
+                  <div class="bg-gradient-to-r from-violet-50 to-purple-50 rounded-xl p-6 border-l-4 border-violet-300 mb-4">
+                    <p class="text-gray-800 text-lg leading-relaxed font-medium">
+                      {{ faq.answer }}
+                    </p>
+                    
+                    <!-- Additional Info -->
+                    <div *ngIf="faq.additionalInfo" class="mt-4 pt-4 border-t border-violet-200">
+                      <p class="text-violet-700 text-sm font-medium flex items-center">
+                        <span class="text-base mr-2">{{ faq.additionalIcon }}</span>
+                        {{ faq.additionalInfo }}
+                      </p>
+                    </div>
+                  </div>
+
+                  <!-- Action Button (if any) -->
+                  <div *ngIf="faq.actionButton" class="text-left">
+                    <button 
+                      class="px-6 py-3 bg-gradient-to-r from-violet-500 to-purple-500 text-white rounded-full font-semibold hover:from-violet-600 hover:to-purple-600 transform hover:scale-105 transition-all duration-300 shadow-md"
+                      (click)="handleFaqAction(faq.actionButton.action); $event.stopPropagation()"
+                    >
+                      {{ faq.actionButton.text }} {{ faq.actionButton.emoji }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Questions Section (Horizontal) -->
+    <div class="mt-20">
+      <h3 class="text-3xl font-bold text-gray-900 text-center mb-12">⚡ Quick Questions</h3>
+      
+      <div class="max-w-6xl mx-auto">
+        <!-- Scrollable container for mobile -->
+        <div class="overflow-x-auto pb-4">
+          <div class="flex space-x-4 min-w-max lg:grid lg:grid-cols-6 lg:gap-4 lg:min-w-0">
+            <div 
+              *ngFor="let quickFaq of quickFaqs; let i = index"
+              class="group bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 border border-gray-100/50 hover:border-violet-200 text-center flex-shrink-0 w-48 lg:w-auto"
+              [class.animate-quick-faq]="isLoaded"
+              [style.animation-delay]="(i * 100 + 800) + 'ms'"
+            >
+              <div class="text-2xl mb-2 group-hover:animate-bounce">{{ quickFaq.icon }}</div>
+              <h4 class="font-semibold text-gray-900 mb-1 text-xs">{{ quickFaq.question }}</h4>
+              <p class="text-gray-600 text-xs leading-tight">{{ quickFaq.answer }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Expand All/Collapse All Controls -->
+    <!-- <div class="text-center mt-12 mb-12">
+      <div class="inline-flex bg-white/90 backdrop-blur-sm rounded-full p-1 shadow-lg border border-violet-100">
+        <button 
+          class="px-4 py-2 text-sm font-medium rounded-full transition-all duration-300"
+          [class]="expandedIndex === -1 ? 'bg-violet-500 text-white shadow-md' : 'text-violet-600 hover:bg-violet-50'"
+          (click)="collapseAll()"
+        >
+          Collapse All
+        </button>
+        <button 
+          class="px-4 py-2 text-sm font-medium rounded-full transition-all duration-300"
+          [class]="allExpanded ? 'bg-violet-500 text-white shadow-md' : 'text-violet-600 hover:bg-violet-50'"
+          (click)="expandAll()"
+        >
+          Expand All
+        </button>
+      </div>
+    </div> -->
+
+    <!-- Still Have Questions Section -->
+    <!-- <div class="mt-16 text-center">
+      <div class="bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 rounded-2xl p-8 text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
+        
+        <div class="absolute top-4 left-8 text-3xl opacity-20 animate-float">❓</div>
+        <div class="absolute top-8 right-12 text-2xl opacity-30 animate-float" style="animation-delay: 1s">❓</div>
+        <div class="absolute bottom-6 left-16 text-xl opacity-25 animate-float" style="animation-delay: 2s">❓</div>
+        
+        <div class="relative">
+          <h3 class="text-3xl font-bold mb-4">Still Have Questions? 🤷‍♀️</h3>
+          <p class="text-xl mb-8 opacity-90">
+            No worries! Our community is here to help you get started
+          </p>
+          
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <button 
+              class="bg-white text-violet-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transform hover:scale-105 transition-all duration-300 shadow-lg"
+              (click)="onAskCommunity()"
+            >
+              Ask the Community 💬
+            </button>
+            <button 
+              class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all duration-300"
+              (click)="onJustTryIt()"
+            >
+              Just Try It! 🚀
+            </button>
+          </div>
+          
+          <p class="text-sm mt-6 opacity-75">
+            💡 Pro tip: The best way to learn is by exploring!
+          </p>
+        </div>
+      </div>
+    </div> -->
+  </div>
+</section>

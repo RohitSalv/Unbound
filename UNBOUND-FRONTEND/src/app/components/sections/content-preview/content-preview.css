@@ -1,0 +1,67 @@
+/* Floating animations for moods */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Staggered animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-post, .animate-channel, .animate-comment {
+  animation: fadeInUp 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+/* Mood selection effects */
+.selected {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Interactive elements */
+.channel-card:hover {
+  transform: translateY(-8px) scale(1.02);
+}
+
+/* Thread connection line animation */
+@keyframes drawLine {
+  from {
+    width: 0;
+  }
+  to {
+    width: 2rem;
+  }
+}
+
+.thread-line {
+  animation: drawLine 1s ease-out;
+}
+
+/* Reaction hover effects */
+span[class*="hover:scale"]:hover {
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .animate-post, .animate-channel, .animate-comment {
+    animation-delay: 0s !important;
+  }
+}

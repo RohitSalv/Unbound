@@ -1,0 +1,58 @@
+/* Step animations */
+@keyframes stepFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-step {
+  animation: stepFadeIn 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+/* Enhanced hover effects */
+.group:hover .absolute {
+  transform: translateX(-50%) translateY(-50%) scale(1.1) rotate(5deg);
+}
+
+/* Mood grid hover effects */
+.mood-grid div:hover {
+  transform: scale(1.1);
+}
+
+/* Connection line animation */
+@keyframes drawLine {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.connection-line {
+  animation: drawLine 2s ease-in-out infinite alternate;
+}
+
+/* Interactive channel cards */
+.channel-card:hover {
+  transform: translateX(4px);
+}
+
+/* Emoji interactions */
+.emoji-reaction:hover {
+  transform: scale(1.3);
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .animate-step {
+    animation-delay: 0s !important;
+  }
+}

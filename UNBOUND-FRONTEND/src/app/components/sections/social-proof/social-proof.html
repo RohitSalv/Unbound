@@ -1,0 +1,227 @@
+<section class="relative py-6">
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Header -->
+    <div class="text-center mb-20">
+      <div class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-emerald-100 to-teal-100 rounded-full text-emerald-700 text-sm font-medium mb-6">
+        <span class="text-lg mr-2">✅</span>
+        Social Proof
+      </div>
+      
+      <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+        Build 
+        <span class="relative">
+          <span class="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+            Trust
+          </span>
+          <svg class="absolute -bottom-2 left-0 w-full h-3" viewBox="0 0 100 12" fill="none">
+            <path d="M2 10C20 3 40 1 98 10" stroke="url(#gradient5)" stroke-width="2" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="gradient5" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#059669"/>
+                <stop offset="100%" style="stop-color:#0d9488"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+      </h2>
+      
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+        Join thousands who've found their voice in our anonymous playground
+      </p>
+    </div>
+
+    <!-- Stats Display Section -->
+    <div class="mb-20">
+      <h3 class="text-3xl font-bold text-gray-900 text-center mb-12">📊 Community Stats</h3>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <div 
+          class="group relative bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 border border-emerald-100/50 hover:border-emerald-200 text-center h-full flex flex-col"
+          [class.animate-stat]="isLoaded"
+        >
+          <!-- Icon -->
+          <div class="text-6xl mb-4 group-hover:animate-bounce">📝</div>
+          
+          <!-- Counter -->
+          <div class="text-4xl font-bold text-emerald-600 mb-2">
+            <span [attr.data-target]="stats.posts">{{ displayStats.posts }}</span>
+          </div>
+          
+          <h4 class="text-xl font-semibold text-gray-900 mb-3 group-hover:text-emerald-700 transition-colors">
+            Posts Shared
+          </h4>
+          
+          <p class="text-gray-600 text-sm leading-relaxed flex-grow">
+            Anonymous thoughts, memes, and confessions shared daily by our vibrant community
+          </p>
+          
+          <div class="text-sm font-semibold text-emerald-600 mt-4">
+            Growing every second 📈
+          </div>
+        </div>
+
+        <div 
+          class="group relative bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 border border-blue-100/50 hover:border-blue-200 text-center h-full flex flex-col"
+          [class.animate-stat]="isLoaded"
+          style="animation-delay: 200ms"
+        >
+          <!-- Icon -->
+          <div class="text-6xl mb-4 group-hover:animate-pulse">🌟</div>
+          
+          <!-- Counter -->
+          <div class="text-4xl font-bold text-blue-600 mb-2">
+            <span [attr.data-target]="stats.dailyVibes">{{ displayStats.dailyVibes }}</span>
+          </div>
+          
+          <h4 class="text-xl font-semibold text-gray-900 mb-3 group-hover:text-blue-700 transition-colors">
+            Daily Vibes
+          </h4>
+          
+          <p class="text-gray-600 text-sm leading-relaxed flex-grow">
+            Active users sharing their moods and connecting with others who feel the same way
+          </p>
+          
+          <div class="text-sm font-semibold text-blue-600 mt-4">
+            Always buzzing 🎵
+          </div>
+        </div>
+
+        <div 
+          class="group relative bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 border border-purple-100/50 hover:border-purple-200 text-center h-full flex flex-col"
+          [class.animate-stat]="isLoaded"
+          style="animation-delay: 400ms"
+        >
+          <!-- Icon -->
+          <div class="text-6xl mb-4 group-hover:animate-spin">🎭</div>
+          
+          <!-- Counter -->
+          <div class="text-4xl font-bold text-purple-600 mb-2">
+            <span [attr.data-target]="stats.moods">{{ displayStats.moods }}</span>
+          </div>
+          
+          <h4 class="text-xl font-semibold text-gray-900 mb-3 group-hover:text-purple-700 transition-colors">
+            Active Moods
+          </h4>
+          
+          <p class="text-gray-600 text-sm leading-relaxed flex-grow">
+            Different emotions and vibes expressed across our diverse community every day
+          </p>
+          
+          <div class="text-sm font-semibold text-purple-600 mt-4">
+            Every feeling welcome 💜
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- User Testimonials Section -->
+    <div class="mb-16">
+      <h3 class="text-3xl font-bold text-gray-900 text-center mb-12">🌟 What Anonymous Users Say</h3>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div 
+          *ngFor="let testimonial of testimonials; let i = index"
+          class="group relative"
+          [class.animate-testimonial]="isLoaded"
+          [style.animation-delay]="(i * 300) + 'ms'"
+        >
+          <!-- Speech Bubble -->
+          <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 border border-gray-100/50 hover:border-teal-200 relative">
+            <!-- Quote Icon -->
+            <div class="absolute -top-3 -left-3 w-8 h-8 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-full flex items-center justify-center shadow-lg">
+              <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L10 4.414 7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+
+            <!-- Testimonial Text -->
+            <blockquote class="text-gray-800 text-lg leading-relaxed mb-6 italic">
+              "{{ testimonial.quote }}"
+            </blockquote>
+
+            <!-- Avatar and Info -->
+            <div class="flex items-center space-x-4">
+              <div class="w-12 h-12 rounded-full flex items-center justify-center shadow-md" [ngStyle]="{'background': testimonial.avatar.gradient}">
+                <span class="text-2xl">{{ testimonial.avatar.emoji }}</span>
+              </div>
+              <div class="flex-grow">
+                <div class="font-semibold text-gray-900">{{ testimonial.username }}</div>
+                <div class="text-sm text-gray-500 flex items-center space-x-2">
+                  <span>{{ testimonial.location }}</span>
+                  <span>•</span>
+                  <span class="flex items-center space-x-1">
+                    <span>{{ testimonial.mood.emoji }}</span>
+                    <span>{{ testimonial.mood.name }}</span>
+                  </span>
+                </div>
+              </div>
+              <!-- Verified Badge -->
+              <div class="text-teal-500" title="Verified Community Member">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.256.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Speech Bubble Tail -->
+            <div class="absolute -bottom-2 left-8 w-4 h-4 bg-white/90 border-r border-b border-gray-100/50 transform rotate-45"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trust Indicators -->
+    <div class="mb-16">
+      <div class="bg-gradient-to-r from-teal-50 to-emerald-50 rounded-2xl p-8 border border-teal-100">
+        <div class="text-center mb-8">
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">🛡️ Safe & Trusted Community</h3>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Our community thrives on respect, authenticity, and positive vibes. Here's what makes us special:
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-4 gap-6">
+          <div 
+            *ngFor="let indicator of trustIndicators; let i = index"
+            class="text-center group"
+            [class.animate-indicator]="isLoaded"
+            [style.animation-delay]="(i * 150) + 'ms'"
+          >
+            <div class="text-4xl mb-3 group-hover:animate-bounce">{{ indicator.icon }}</div>
+            <div class="text-lg font-semibold text-gray-900 mb-2">{{ indicator.title }}</div>
+            <div class="text-sm text-gray-600">{{ indicator.description }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="text-center">
+      <div class="bg-gradient-to-r from-emerald-600 via-teal-600 to-blue-600 rounded-2xl p-8 text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
+        
+        <div class="relative">
+          <h3 class="text-3xl font-bold mb-4">Join the Community! 🌈</h3>
+          <p class="text-xl mb-2 opacity-90">
+            <strong>{{ displayStats.posts }}+ posts</strong> • <strong>{{ displayStats.dailyVibes }}+ daily vibes</strong> • <strong>{{ displayStats.moods }}+ moods</strong>
+          </p>
+          <p class="text-lg mb-8 opacity-80">
+            Be part of something bigger — your voice matters here
+          </p>
+          <button 
+            class="bg-white text-emerald-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transform hover:scale-105 transition-all duration-300 shadow-lg mr-4"
+            (click)="onJoinCommunity()"
+          >
+            Join Now 🚀
+          </button>
+          <button 
+            class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all duration-300"
+            (click)="onLearnMore()"
+          >
+            Learn More ✨
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

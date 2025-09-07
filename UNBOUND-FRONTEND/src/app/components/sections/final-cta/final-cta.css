@@ -1,0 +1,179 @@
+/* CTA Button animations */
+@keyframes ctaGlow {
+  0%, 100% {
+    box-shadow: 0 10px 40px rgba(236, 72, 153, 0.3);
+  }
+  50% {
+    box-shadow: 0 10px 60px rgba(139, 92, 246, 0.4);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes pulse3D {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.animate-cta-button {
+  animation: fadeInUp 1s ease-out forwards, ctaGlow 3s ease-in-out infinite;
+}
+
+.animate-indicator {
+  animation: fadeInUp 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Button hover effects */
+.group:hover .absolute.inset-0.rounded-full {
+  animation: pulse3D 0.6s ease-out;
+}
+
+/* Enhanced button shadow */
+button[class*="shadow-2xl"] {
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+button[class*="shadow-2xl"]:hover {
+  box-shadow: 
+    0 35px 60px -12px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Footer background */
+footer {
+  background: 
+    linear-gradient(135deg, rgba(17, 24, 39, 0.95) 0%, rgba(88, 28, 135, 0.95) 50%, rgba(17, 24, 39, 0.95) 100%),
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="%23ffffff" opacity="0.1"/><circle cx="80" cy="40" r="1.5" fill="%23ffffff" opacity="0.08"/><circle cx="40" cy="80" r="1" fill="%23ffffff" opacity="0.06"/></svg>');
+}
+
+/* Social icons */
+.social-icon {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.social-icon:hover {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.8) 0%, rgba(236, 72, 153, 0.8) 100%);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Link hover effects */
+a[class*="hover:translate-x-1"] {
+  position: relative;
+}
+
+a[class*="hover:translate-x-1"]::before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  width: 4px;
+  height: 0;
+  background: linear-gradient(90deg, #8b5cf6, #ec4899);
+  border-radius: 2px;
+  transform: translateY(-50%);
+  transition: height 0.3s ease;
+}
+
+a[class*="hover:translate-x-1"]:hover::before {
+  height: 100%;
+}
+
+/* Trust indicators spacing */
+.trust-indicators {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+}
+
+/* Footer responsive adjustments */
+@media (max-width: 768px) {
+  .animate-cta-button, .animate-indicator {
+    animation-delay: 0s !important;
+  }
+
+  /* Reduce floating animations on mobile for performance */
+  .animate-float {
+    animation-duration: 6s;
+  }
+
+  /* Adjust footer grid */
+  .grid.lg\\:grid-cols-3 {
+    gap: 2rem;
+  }
+}
+
+/* SSR fallbacks */
+@media (prefers-reduced-motion: reduce) {
+  .animate-cta-button, .animate-indicator, .animate-float {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* No-JS support */
+.no-js .animate-cta-button,
+.no-js .animate-indicator {
+  opacity: 1;
+  transform: none;
+}
+
+/* Gradient text enhancement */
+.bg-gradient-to-r.from-pink-400 {
+  background-size: 200% 200%;
+  animation: gradientShift 4s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Button ripple effect */
+@keyframes ripple {
+  0% {
+    opacity: 0.6;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+.group:active .absolute.inset-0.rounded-full {
+  animation: ripple 0.6s ease-out;
+}

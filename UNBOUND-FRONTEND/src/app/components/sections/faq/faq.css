@@ -1,0 +1,130 @@
+/* Accordion animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-faq {
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-quick-faq {
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Accordion expand/collapse animations */
+.expanded {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(168, 85, 247, 0.05) 100%);
+}
+
+/* Rotate icon animation */
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
+/* Smooth transitions */
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Icon hover effects */
+.group:hover .flex-shrink-0 > div {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Quick FAQ horizontal scroll */
+.overflow-x-auto::-webkit-scrollbar {
+  height: 4px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-track {
+  background: rgba(139, 92, 246, 0.1);
+  border-radius: 10px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #7c3aed, #a855f7);
+  border-radius: 10px;
+}
+
+/* Control buttons */
+.inline-flex button {
+  position: relative;
+  overflow: hidden;
+}
+
+.inline-flex button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(139, 92, 246, 0.1);
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s;
+}
+
+.inline-flex button:hover::before {
+  width: 100px;
+  height: 100px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .animate-faq, .animate-quick-faq {
+    animation-delay: 0s !important;
+  }
+
+  /* Make quick FAQ cards slightly smaller on mobile */
+  .w-48 {
+    width: 10rem;
+  }
+}
+
+/* SSR fallbacks */
+@media (prefers-reduced-motion: reduce) {
+  .animate-faq, .animate-quick-faq {
+    animation: none;
+    opacity: 1;
+  }
+  
+  .animate-float {
+    animation: none;
+  }
+}
+
+/* No-JS support */
+.no-js .animate-faq,
+.no-js .animate-quick-faq {
+  opacity: 1;
+  transform: none;
+}
+
+/* Ensure smooth accordion transitions */
+[style*="max-height"] {
+  transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out;
+}

@@ -1,0 +1,269 @@
+<section class="relative py-6">
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Header -->
+    <div class="text-center mb-20">
+      <div class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-orange-100 to-yellow-100 rounded-full text-orange-700 text-sm font-medium mb-6">
+        <span class="text-lg mr-2">🎨</span>
+        Content Preview
+      </div>
+      
+      <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+        Show What 
+        <span class="relative">
+          <span class="bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent">
+            They'll Get
+          </span>
+          <svg class="absolute -bottom-2 left-0 w-full h-3" viewBox="0 0 100 12" fill="none">
+            <path d="M2 10C20 3 40 1 98 10" stroke="url(#gradient4)" stroke-width="2" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="gradient4" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#ea580c"/>
+                <stop offset="100%" style="stop-color:#ec4899"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+      </h2>
+      
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+        A quick taste of the playground — see the fun before you join!
+      </p>
+    </div>
+
+    <!-- Moods Filter Section -->
+    <div class="text-center mb-16">
+      <h3 class="text-2xl font-bold text-gray-900 mb-8">🎭 Moods in Motion</h3>
+      <div class="flex flex-wrap justify-center gap-4 mb-8">
+        <div 
+          *ngFor="let mood of moods; let i = index"
+          class="group cursor-pointer transform transition-all duration-300 hover:scale-110"
+          [class.selected]="selectedMood === mood.name"
+          [style.animation-delay]="i * 100 + 'ms'"
+          (click)="selectMood(mood.name)"
+        >
+          <div class="flex flex-col items-center p-4 rounded-2xl transition-all duration-300"
+               [ngClass]="selectedMood === mood.name ? mood.activeBg : mood.bg">
+            <div class="text-4xl mb-2 animate-float" [style.animation-delay]="i * 200 + 'ms'">
+              {{ mood.emoji }}
+            </div>
+            <span class="text-sm font-medium" [ngClass]="selectedMood === mood.name ? mood.activeText : mood.text">
+              {{ mood.name }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <p class="text-sm text-gray-500">👆 Click on any mood to filter posts</p>
+    </div>
+
+    <!-- Anonymous Posts Section -->
+    <div class="mb-20">
+      <h3 class="text-3xl font-bold text-gray-900 text-center mb-12">📝 Anonymous Posts in Action</h3>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div 
+          *ngFor="let post of filteredPosts; let i = index"
+          class="group bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 border border-gray-100/50 hover:border-orange-200 h-full flex flex-col"
+          [class.animate-post]="isVisible"
+          [style.animation-delay]="i * 200 + 'ms'"
+        >
+          <!-- Post Header -->
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center space-x-2">
+              <div class="w-8 h-8 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full"></div>
+              <span class="text-sm text-gray-500">Anonymous</span>
+            </div>
+            <div class="flex items-center space-x-1 px-3 py-1 rounded-full text-sm" [ngClass]="post.mood.bg + ' ' + post.mood.text">
+              <span>{{ post.mood.emoji }}</span>
+              <span class="font-medium">{{ post.mood.name }}</span>
+            </div>
+          </div>
+
+          <!-- Post Content -->
+          <div class="flex-grow">
+            <p class="text-gray-800 text-lg leading-relaxed mb-4">{{ post.content }}</p>
+            
+            <!-- Tags -->
+            <div class="flex flex-wrap gap-2 mb-4" *ngIf="post.tags.length > 0">
+              <span 
+                *ngFor="let tag of post.tags"
+                class="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm hover:bg-orange-200 transition-colors cursor-pointer"
+              >
+                {{ tag }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Post Footer -->
+          <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+            <div class="flex items-center space-x-3">
+              <div class="flex space-x-1">
+                <span 
+                  *ngFor="let reaction of post.reactions"
+                  class="text-lg hover:scale-125 transition-transform cursor-pointer"
+                  [title]="reaction.name"
+                >
+                  {{ reaction.emoji }}
+                </span>
+              </div>
+              <span class="text-sm text-gray-500">{{ post.reactionCount }} reactions</span>
+            </div>
+            <div class="flex items-center space-x-2 text-sm text-gray-500">
+              <span>💬 {{ post.commentCount }}</span>
+              <span>🧵 {{ post.threadCount }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Channels Showcase -->
+    <div class="mb-20">
+      <h3 class="text-3xl font-bold text-gray-900 text-center mb-12">📚 Channels Showcase</h3>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <div 
+          *ngFor="let channel of channels; let i = index"
+          class="group bg-white/90 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 border border-gray-100/50 hover:border-purple-200 h-full"
+          [class.animate-channel]="isVisible"
+          [style.animation-delay]="i * 300 + 'ms'"
+        >
+          <!-- Channel Cover -->
+          <div class="h-32 relative overflow-hidden" [ngClass]="channel.coverGradient">
+            <div class="absolute inset-0 bg-black/20"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <span class="text-6xl">{{ channel.emoji }}</span>
+            </div>
+            <div class="absolute top-4 right-4 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1">
+              <span class="text-white text-sm font-medium">{{ channel.memberCount }} members</span>
+            </div>
+          </div>
+
+          <!-- Channel Info -->
+          <div class="p-6 flex flex-col h-full">
+            <h4 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-purple-700 transition-colors">
+              {{ channel.name }}
+            </h4>
+            <p class="text-gray-600 text-sm leading-relaxed mb-4 flex-grow">
+              {{ channel.description }}
+            </p>
+            
+            <!-- Channel Stats -->
+            <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+              <div class="flex items-center space-x-4 text-sm text-gray-500">
+                <span>📝 {{ channel.postCount }} posts</span>
+                <span>🔥 {{ channel.activeCount }} active</span>
+              </div>
+              <button class="px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-medium hover:bg-purple-200 transition-colors">
+                Join
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Thread Preview -->
+    <div class="mb-16">
+      <h3 class="text-3xl font-bold text-gray-900 text-center mb-12">🔗 Threads & Comments</h3>
+      
+      <div class="max-w-4xl mx-auto">
+        <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-gray-100/50">
+          <!-- Original Post -->
+          <div class="mb-6">
+            <div class="flex items-center space-x-3 mb-4">
+              <div class="w-10 h-10 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full"></div>
+              <div>
+                <span class="text-sm text-gray-500">Anonymous • Original Post</span>
+                <div class="flex items-center space-x-2 mt-1">
+                  <span class="text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded-full">😂 Funny</span>
+                </div>
+              </div>
+            </div>
+            <p class="text-lg text-gray-800 mb-4">
+              "Why do we say 'after dark' when it's actually after light? 🤔"
+            </p>
+            <div class="flex items-center space-x-4">
+              <div class="flex space-x-1">
+                <span class="text-xl hover:scale-125 transition-transform cursor-pointer">🤯</span>
+                <span class="text-xl hover:scale-125 transition-transform cursor-pointer">💭</span>
+                <span class="text-xl hover:scale-125 transition-transform cursor-pointer">🔥</span>
+              </div>
+              <span class="text-sm text-gray-500">42 reactions</span>
+            </div>
+          </div>
+
+          <!-- Thread Connection -->
+          <div class="flex items-center mb-4">
+            <div class="w-8 h-0.5 bg-gradient-to-r from-purple-300 to-pink-300"></div>
+            <span class="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full ml-2">Thread continues...</span>
+          </div>
+
+          <!-- Comments -->
+          <div class="space-y-4 ml-8">
+            <div 
+              *ngFor="let comment of threadComments; let i = index"
+              class="bg-gray-50 rounded-xl p-4 hover:bg-gray-100 transition-colors"
+              [class.animate-comment]="isVisible"
+              [style.animation-delay]="(i + 1) * 400 + 'ms'"
+            >
+              <div class="flex items-start space-x-3">
+                <div class="w-8 h-8 bg-gradient-to-r from-green-400 to-blue-400 rounded-full flex-shrink-0"></div>
+                <div class="flex-grow">
+                  <div class="flex items-center space-x-2 mb-2">
+                    <span class="text-sm text-gray-500">Anonymous</span>
+                    <span class="text-xs bg-gray-200 text-gray-600 px-2 py-1 rounded">{{ comment.timeAgo }}</span>
+                  </div>
+                  <p class="text-gray-800 mb-2">{{ comment.content }}</p>
+                  <div class="flex items-center space-x-2">
+                    <div class="flex space-x-1">
+                      <span 
+                        *ngFor="let reaction of comment.reactions"
+                        class="text-sm hover:scale-110 transition-transform cursor-pointer"
+                      >
+                        {{ reaction }}
+                      </span>
+                    </div>
+                    <span class="text-xs text-gray-500">{{ comment.reactionCount }} reactions</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Add Comment -->
+          <div class="mt-6 pt-6 border-t border-gray-200">
+            <div class="bg-gray-50 rounded-xl p-4 border-2 border-dashed border-gray-300 text-center">
+              <span class="text-gray-500">💭 Join the conversation anonymously...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom CTA -->
+    <!-- <div class="text-center">
+      <div class="bg-gradient-to-r from-orange-600 via-pink-600 to-purple-600 rounded-2xl p-8 text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
+        
+        <div class="relative">
+          <h3 class="text-3xl font-bold mb-4">Ready to Dive In? 🏊‍♀️</h3>
+          <p class="text-xl mb-8 opacity-90">
+            Join the playground and start expressing yourself freely!
+          </p>
+          <button 
+            class="bg-white text-purple-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transform hover:scale-105 transition-all duration-300 shadow-lg mr-4"
+            (click)="onStartPosting()"
+          >
+            Start Posting Now 🚀
+          </button>
+          <button 
+            class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all duration-300"
+            (click)="onExploreMore()"
+          >
+            Explore More ✨
+          </button>
+        </div>
+      </div>
+    </div> -->
+  </div>
+</section>
